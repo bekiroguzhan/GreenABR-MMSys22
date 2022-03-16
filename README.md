@@ -33,7 +33,7 @@ To train for any representation set, run ``python evaluate.py`` under the corres
 python evaluate.py
 ```
 #### Plotting Graphs
-GreenABR is compared several SOTA works for evaluations. Bola, Bolae, Dynamic-Dash, Dynamic ABR, Throughput Rule from the [sabre](https://github.com/umass-lids/sabre) environment and [Pensieve](https://github.com/hongzimao/pensieve) with its own environment. The results from these environments should include VMAF values for every selected chunk along with other streaming values such as rebuffering time. The logs for these algorithms are included in test_results folder. 
+GreenABR is compared several SOTA works for evaluations. Bola, Bolae, Dynamic-Dash, Dynamic ABR, Throughput Rule from the [**Sabre**](https://github.com/umass-lids/sabre) environment and [**Pensieve**](https://github.com/hongzimao/pensieve) with its own environment. The results from these environments should include VMAF values for every selected chunk along with other streaming values such as rebuffering time. The logs for these algorithms are included in test_results folder. 
 To plot the graphs for each representation set, run the following under the corresponding folder:
 ```
 python create_summary_results.py
