@@ -34,12 +34,12 @@ The dataset for the power consumption measurements and the training code is avai
 
 Below is the list of libraries needed for training and saving the model.
 
-- python version = 3.7.
-- Keras version = 2.3.
-- numpy version = 1.16.
-- pandas version = 0.24.
-- scikit-learn version = 0.21.
-- joblib version = 1.0.
+- python version = 3.7.3
+- Keras version = 2.3.1
+- numpy version = 1.16.4
+- pandas version = 0.24.2
+- scikit-learn version = 0.21.2
+- joblib version = 1.0.1
 
 
 ### Installation
@@ -96,13 +96,13 @@ folder. The training scripts are available for each representation set separatel
 ### Software dependencies.
 Below is the list of libraries needed for training and saving the model.
 
-- python version = 3.7.
-- Keras version = 2.3.
-- numpy version = 1.16.
-- pandas version = 0.24.
-- scikit-learn version = 0.21.
-- joblib version = 1.0.
-- matplotlib version = 3.1.
+- python version = 3.7.3
+- Keras version = 2.3.1
+- numpy version = 1.16.4
+- pandas version = 0.24.2
+- scikit-learn version = 0.21.2
+- joblib version = 1.0.1
+- matplotlib version = 3.1.0
 
 ### Installation
 
@@ -185,10 +185,10 @@ code are available under "standard_qoe_model" folder.
 ### Software dependencies.
 Below is the list of libraries needed for training and saving the model.
 
-- python version = 3.7.
-- numpy version = 1.16.
-- pandas version = 0.24.
-- scikit-learn version = 0.21.
+- python version = 3.7.3
+- numpy version = 1.16.4
+- pandas version = 0.24.2
+- scikit-learn version = 0.21.2
 
 
 ### Installation
