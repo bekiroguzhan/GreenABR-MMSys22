@@ -1,53 +1,220 @@
 # GreenABR-MMSys22
 GreenABR is an energy aware adaptive bitrate streaming model designed with deep reinforcement learning. 
 
-### Prerequisites
+
+## Power Model Training
+
+
+### Abstract
+The proposed power model estimates the power consumption pattern for local playback component by using the normalized streaming attributes of videos. 
+The details of the training methodology and model details are given in Section 3.1.3 of the paper.
+
+
+### Artifact Checklist
+
+- Algorithm:Linear Regression
+- Dataset:Collected power measurements during streaming
+    sessions
+- Metrics:Root mean squared error(rmse)
+- How much time is needed to complete experiments
+    (approximately)?:Three hours
+- DOI:10.5281/zenodo.
+
+
+### Description
+A linear regression model to estimate the power consumption between 0 and 1 as 1 is the highest.
+
+
+### How delivered.
+The dataset for the power consumption measurements and the training code is available under "power_model" folder.
+
+
+### Software dependencies.
+
+Below is the list of libraries needed for training and saving the model.
 ```
-python                 3.7.3
-Keras                  2.3.1
-numpy                  1.16.4
-matplotlib             3.1.0
-pandas                 0.24.2
-joblib                 1.0.1
-tensorflow             1.14.0
-scikit-learn           0.21.2
+- python version = 3.7.
+- Keras version = 2.3.
+- numpy version = 1.16.
+- pandas version = 0.24.
+- scikit-learn version = 0.21.
+- joblib version = 1.0.
+
+```
+### Installation
+To install the required libraries:
+```
+python setup.py
 ```
 
-### Power Model 
-Streaming power measurements are stored under /power_model/dataset folder. The measurements are aggregated for each second. Galaxy S4 dataset is used for training the model and XCover Pro device is used for testing. To train the power model and evaluate use ``python train.py`` under **power_model** folder.
+### Experiment workflow
+To train the power model, run the below command under "power_model" folder.
 ```
 python train.py
 ```
+The script trains the model, saves it and prints the evaluation
+results.
 
-### GreenABR Training 
-To train GreenABR, first you need to train the power model and copy the saved model to **"training"** folder. "training" folder includes network traces(cooked_traces) and "power_attributes.csv" file. Use "rep_6" folder to train for 6 representations case and "rep_10" for 10 representations. Each folder has the training script and resource files for training. 
+
+
+### Evaluation and expected result
+
+For the training dataset, the model performs rmse less than
+0.01 and for evaluation dataset it produces rmse 0.036.
+
+
+## GreenABR
+
+### Abstract
+
+GreenABR proposes an energy-aware ABR model designed
+by using deep reinforcement learning. The training method-
+ology and details of the model are explained in Section3.2.
+
+### Artifact Checklist
+
+- Algorithm:DQN
+- Dataset:Power attributes dataset and VMAF measurements
+- Metrics:QoE based on Equation 3.
+- How much time is needed to complete experiments
+    (approximately)?:Eight hours
+- Code licenses (if publicly available)?:BSD-2-Clause
+- DOI:10.5281/zenodo.
+
+### Description
+
+GreenABR proposes energy aware ABR decisions for HTTP
+streaming. It requires the power model to be trained in advance. It uses the number of representations as the action
+space of the RL model, thus requires separate training for six and ten representations case.
+
+### How delivered.
+
+All training and evaluation files and required measurement data are available under "GreenABR"
+folder. The training scripts are available for each representation set separately.
+
+### Software dependencies.
+Below is the list of libraries needed for training and saving the model.
+
+- python version = 3.7.
+- Keras version = 2.3.
+- numpy version = 1.16.
+- pandas version = 0.24.
+- scikit-learn version = 0.21.
+- joblib version = 1.0.
+- matplotlib version = 3.1.
+
+### Installation
+
+To install the required libraries:
+
+```
+python setup.py
+```
+### Experiment workflow
+
+To train GreenABR, run the below command under "rep_6"
+and "rep_10" folders for the corresponding representation sets.
+
 ```
 python GreenABR.py
 ```
-The default script is set to have 30000 iterations and we found 9000 iterations to be optimal to avoid overfitting. Training script saves the model at every 1000 iterations to "savedModels" folder. 
+The script trains the model, saves it for every 1000 iterations
+and logs the average reward at each iteration. We found 9000
+iterations to be optimal with the hyperparameter values as
+learning rate($\alpha$) = 0.0001, discount factor($\gamma$) = 0.99, 
+initial $\epsilon$ = 1.0, and $\epsilon$-decay = 0.9995 to satisfy enough exploration
+during training. We set the experience replay memory size to
+store the most recent 500000 steps while updating the target
+network at every 100 steps.
 
-### GreenABR Evaluation
-To evaluate GreenABR, first copy the saved model for each representation set to the corresponding folder. For rep_10_exp2, you can use the same model with rep_10. All source files for evaluations are given under "powerMeasurementFiles", "evaluationFiles", "test_sim_traces" folders. Power model and power attributes files should also be given for power model use. 
-To train for any representation set, run ``python evaluate.py`` under the corresponding folder. 
-```
+
+### Evaluation and expected result
+To evaluate GreenABR for any representation set, copy the
+pre-trained model of the same representation set along with
+the power model. All required source ￿les are provided under
+"evaluation" folder. To generate the streaming logs of the
+tested videos for GreenABR:
 python evaluate.py
-```
-#### Plotting Graphs
-GreenABR is compared several SOTA works for evaluations. Bola, Bolae, Dynamic-Dash, Dynamic ABR, Throughput Rule from the [**Sabre**](https://github.com/umass-lids/sabre) environment and [**Pensieve**](https://github.com/hongzimao/pensieve) with its own environment. The results from these environments should include VMAF values for every selected chunk along with other streaming values such as rebuffering time. The logs for these algorithms are included in test_results folder. 
-To plot the graphs for each representation set, run the following under the corresponding folder:
+GreenABR is compared with several SOTA models and
+their streaming logs are generated by using their testing
+simulators, [**Sabre**](https://github.com/umass-lids/sabre) and [**Pensieve**](https://github.com/hongzimao/pensieve). Results are stored under "test_results"
+folder for all algorithms. 
+To plot the graphs, run:
 ```
 python create_summary_results.py
 python plot_graphs.py
 ```
-All figures are saved to the "plots" folder in the same directory. 
+for each representation set under the corresponding folder.
 
-### QoE Model 
-To train and find the coefficients of our proposed QoE model, [THE WATERLOO STREAMING QUALITY-OF-EXPERIENCE DATABASE-III](https://ieee-dataport.org/open-access/waterloo-streaming-quality-experience-database-iii) is used. The required files for training are given in "data.csv" file and "streaming_logs" folder.
-To train and find the coefficients:
+
+## C Standard QoE Model Training
+
+
+### Abstract
+Comparing ABRs designed for di￿erent goals are not trivial
+and may lead to misleading results in terms of real users per-
+ception. To enable fair comparisons, we designed a standard
+QoE model based on SQoE-III [ 17 ] dataset which is a large
+dataset with subjective scores of real users.
+
+
+### Artifact Checklist
+
+- Algorithm:Linear Regression
+- Dataset:SQoE-III [ 17 ]
+- Metrics:Spearman Correlation Score
+- How much time is needed to complete experiments
+    (approximately)?:1 hours
+- DOI:10.5281/zenodo.
+
+
+### Description
+Our model uses five significant components described in
+existing quality of experience studies for video streaming. It
+uses a linear regression model to maximize the Spearman
+correlation score between the estimated QoE scores and the
+real users’ mean opinion scores.
+
+
+### How delivered.
+The dataset files and the training
+code are available under "standard_qoe_model" folder.
+
+
+### Software dependencies.
+Below is the list of libraries needed for training and saving the model.
+
+- python version = 3.7.
+- numpy version = 1.16.
+- pandas version = 0.24.
+- scikit-learn version = 0.21.
+
+
+### Installation
+
+To install the required libraries:
+
+```
+python setup.py
+```
+### Experiment workflow
+
+To train the QoE model, and find the coefficients:
+
 ```
 python train.py
 ```
+
+The script trains the model and prints the coefficients along
+with the Spearman score of the model.
+
+
+### Evaluation and expected result
+We compared our model with proposed QoE models in Pensieve, Comyco, and the sample model in the dataset. Our
+model provides the highest score with 0.7845.
+
 To compare with other QoE models:
 ```
 python compare_models.py
 ```
+
