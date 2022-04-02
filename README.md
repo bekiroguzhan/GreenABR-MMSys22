@@ -18,7 +18,8 @@ The details of the training methodology and model details are given in Section 3
 - Metrics:Root mean squared error(rmse)
 - How much time is needed to complete experiments
     (approximately)?:Three hours
-- DOI:10.5281/zenodo.
+- DOI:[**10.5281/zenodo.6402904**](https://zenodo.org/badge/latestdoi/470391129)
+
 
 
 ### Description
@@ -32,7 +33,7 @@ The dataset for the power consumption measurements and the training code is avai
 ### Software dependencies.
 
 Below is the list of libraries needed for training and saving the model.
-```
+
 - python version = 3.7.
 - Keras version = 2.3.
 - numpy version = 1.16.
@@ -40,7 +41,7 @@ Below is the list of libraries needed for training and saving the model.
 - scikit-learn version = 0.21.
 - joblib version = 1.0.
 
-```
+
 ### Installation
 To install the required libraries:
 ```
@@ -79,7 +80,7 @@ ology and details of the model are explained in Section3.2.
 - How much time is needed to complete experiments
     (approximately)?:Eight hours
 - Code licenses (if publicly available)?:BSD-2-Clause
-- DOI:10.5281/zenodo.
+- DOI:[**10.5281/zenodo.6402904**](https://zenodo.org/badge/latestdoi/470391129)
 
 ### Description
 
@@ -165,7 +166,7 @@ dataset with subjective scores of real users.
 - Metrics:Spearman Correlation Score
 - How much time is needed to complete experiments
     (approximately)?:1 hours
-- DOI:10.5281/zenodo.
+- DOI:[**10.5281/zenodo.6402904**](https://zenodo.org/badge/latestdoi/470391129)
 
 
 ### Description
