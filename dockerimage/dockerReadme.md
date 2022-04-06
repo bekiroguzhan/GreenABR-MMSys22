@@ -3,9 +3,7 @@ The image includes all libraries for training and evaluations. Thus, you do not 
 
 ### To import the image 
 ```
-docker import \                                        
---change 'CMD ["bash"]' \
-greenabr.tar greenabr:local
+docker import --change 'CMD ["bash"]' greenabr.tar greenabr:local
 ```
 
 ### To run the container 
